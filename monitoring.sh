@@ -21,7 +21,7 @@ d_idle=$(echo $t2 $t1 | awk '{print ($2 - $4)}')
 # Final general layout
 output+=$ASCII
 output+="#Architecture: $(uname -a)"
-output+="\n#CPU physical : $(grep '^cpu cores' /proc/cpuinfo | uniq | awk '{print $NF}')"
+output+="\n#CPU physical : $(lscpu | grep 'Sock' | awk '{print $2}')"
 output+="\n#vCPU : $(nproc --all)"
 output+="\n#Memory Usage: $(awk 'NR==1 {total=int($2 / 1024)} NR==2 {free=int($2 / 1024)} {used=total-free} END \
     {print used"/"total"MB ("sprintf("%.2f", used*100/total)"%)"}' </proc/meminfo)"
