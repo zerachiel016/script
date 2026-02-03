@@ -32,6 +32,6 @@ output+="\n#LVM use: $(lsblk -o TYPE | grep -q lvm && echo yes || echo no)"
 output+="\n#Connections TCP : $(ss -t | grep ESTAB | wc -l) ESTABLISHED"
 output+="\n#User log: $(who | awk '{print $1}' | sort -u | wc -l)"
 output+="\n#Network: IP $(hostname -I | awk '{print $1}') ($(ip link | grep "link/ether" | awk '{print $2}'))"
-output+="\n#Sudo : $(journalctl -q _COMM=sudo | grep -c COMMAND=)"
+output+="\n#Sudo : $(journalctl -q _COMM=sudo | grep -c COMMAND=) cmd"
 
 echo -e "$output"
